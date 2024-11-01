@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image, ImageBackground } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -46,22 +46,30 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pokémon List</Text>
-      <FlatList
-        data={pokemonList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </View>
+    <ImageBackground
+      source={{ uri: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/13a8f158-01ef-4fe2-a50e-6daf932d43fd/d7adm93-856ace7e-bd90-4f82-9953-0d557aceb07d.png/v1/fill/w_900,h_1273,q_80,strp/twitch_plays_pokemon_by_mizudokei_d7adm93-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI3MyIsInBhdGgiOiJcL2ZcLzEzYThmMTU4LTAxZWYtNGZlMi1hNTBlLTZkYWY5MzJkNDNmZFwvZDdhZG05My04NTZhY2U3ZS1iZDkwLTRmODItOTk1My0wZDU1N2FjZWIwN2QucG5nIiwid2lkdGgiOiI8PTkwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7RjtDQKAeHcg7CGMXfCvtWWcj4QCbNf-SBqRTQ6M6PU' }} // Substitua pelo URL da sua imagem
+      style={styles.background}
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.title}>Pokémon List</Text>
+        <FlatList
+          data={pokemonList}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Adiciona um leve overlay branco
     padding: 16,
   },
   title: {
